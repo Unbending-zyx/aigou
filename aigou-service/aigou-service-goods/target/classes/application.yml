@@ -1,0 +1,24 @@
+server:
+  port: 18081
+spring:
+  application:
+    name: aigou-goods
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.16.81.31:3306/aigou-goods?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: lenovolabs
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka #eureka注册地址
+  instance:
+    prefer-ip-address: true #将ip注册到eureka service上  如果为false  则注册主机名
+feign:
+  hystrix:
+    enabled: true #开启hystrix
+mybatis: #mybatis 一下配置可以不写  使用通用mapper可以不配置
+  configuration:
+    map-underscore-to-camel-case: true #该配置项就是指将带有下划线的表字段映射为驼峰格式的实体类属性。
+  mapper-locations: classpath:mapper/*Mapper.xml #配置mapper文件的路径
+  type-aliases-package: com.yuxiao.aigou.goods.pojo #定义表对应实体类所在的路径

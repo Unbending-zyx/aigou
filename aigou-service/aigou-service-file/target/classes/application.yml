@@ -1,0 +1,18 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB #单个文件大小
+      max-request-size: 10MB #上传的总数据大小
+  application:
+    name: aigou-file
+server:
+  port: 18082
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+  instance:
+    prefer-ip-address: true #将ip注册到eureka service上  如果为false  则注册主机名
+feign:
+  hystrix:
+    enabled: true
