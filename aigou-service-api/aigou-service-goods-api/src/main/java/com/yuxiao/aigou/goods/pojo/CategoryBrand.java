@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /****
- * @Author:admin
+ * @Author:shenkunlin
  * @Description:CategoryBrand构建
  * @Date 2019/6/14 19:13
  *****/
@@ -21,10 +21,11 @@ public class CategoryBrand implements Serializable{
 	@Id
     @Column(name = "category_id")
 	private Integer categoryId;//分类ID
+
 	@ApiModelProperty(value = "品牌ID",required = false)
-	@Id
-	@Column(name = "brand_id")
+    @Column(name = "brand_id")
 	private Integer brandId;//品牌ID
+
 
 
 	//get方法

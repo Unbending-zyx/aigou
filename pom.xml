@@ -16,6 +16,7 @@
         <module>aigou-eureka</module>
         <module>aigou-common</module>
         <module>aigou-common-db</module>
+        <module>aigou-code-template</module>
     </modules>
 
     <parent>
