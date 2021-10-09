@@ -1,6 +1,7 @@
 package com.yuxiao.aigou.goods.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.yuxiao.aigou.goods.dto.Goods;
 import com.yuxiao.aigou.goods.pojo.Spu;
 import com.yuxiao.aigou.goods.service.SpuService;
 import com.yuxiao.aigou.common.entry.Result;
@@ -20,6 +21,91 @@ public class SpuController {
 
     @Autowired
     private SpuService spuService;
+
+    /**
+     * 恢复被逻辑删除的商品数据
+     * @param id
+     * @return
+     */
+    @PutMapping("/restore/{id}")
+    public Result restore(@PathVariable Long id){
+        spuService.restore(id);
+        return new Result(true,StatusCode.OK,"数据恢复成功！");
+    }
+
+    /**
+     * 逻辑删除
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/logic/delete/{id}")
+    public Result logicDelete(@PathVariable Long id){
+        spuService.logicDelete(id);
+        return new Result(true,StatusCode.OK,"逻辑删除成功！");
+    }
+
+    /**
+     * 批量下架商品
+     */
+    @PutMapping("/pull/many")
+    public Result pullMany(@RequestParam Long[] ids){
+        int count=spuService.pullMany(ids);
+        return new Result(true,StatusCode.OK,"商品下架成功,共下架"+count+"个商品");
+    }
+
+    /**
+     * 批量上架商品
+     */
+    @PutMapping("/put/many")
+    public Result putMany(@RequestParam Long[] ids){
+        int count=spuService.putMany(ids);
+        return new Result(true,StatusCode.OK,"商品上架成功,共上架"+count+"个商品");
+    }
+
+    /**
+     * 商品上架  只有通过审核的商品才能上架
+     */
+    @PutMapping("/put/{id}")
+    public Result put(@PathVariable("id") Long id) throws Exception {
+        spuService.put(id);
+        return new Result(true,StatusCode.OK,"商品上架成功");
+    }
+
+    /**
+     * 商品下架
+     */
+    @PutMapping("/pull/{id}")
+    public Result pull(@PathVariable("id") Long id) throws Exception {
+        spuService.pull(id);
+        return new Result(true,StatusCode.OK,"商品下架成功");
+    }
+
+    /**
+     * 商品审批
+     */
+    @PutMapping("/audit/{id}")
+    public Result audit(@PathVariable("id") Long id) throws Exception {
+        spuService.audit(id);
+        return new Result(true,StatusCode.OK,"商品审批成功");
+    }
+
+    /**
+     * 根据spu id查询goods
+     */
+    @GetMapping("/goods/{id}")
+    public Result<Goods>  findGoodsById(@PathVariable("id") Long id){
+        Goods goods = spuService.findGoodsById(id);
+        return new Result<Goods>(true,StatusCode.OK,"根据 spu id 查询goods成功",goods);
+    }
+
+    /**
+     * 实现添加商品
+     */
+    @PostMapping("/save")
+    public Result saveGoods(@RequestBody Goods goods){
+        spuService.saveGoods(goods);
+        return new Result(true,StatusCode.OK,"添加/更新商品成功");
+    }
 
     /***
      * Spu分页条件搜索实现

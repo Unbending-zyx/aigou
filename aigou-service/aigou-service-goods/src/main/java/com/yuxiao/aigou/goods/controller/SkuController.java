@@ -21,6 +21,16 @@ public class SkuController {
     @Autowired
     private SkuService skuService;
 
+    /**
+     * 根据sku id  修改sku库存
+     */
+    @GetMapping("/change/num/{id}")
+    public Result changeSkuNum(@PathVariable("id") Long id,@RequestParam Integer num){
+        System.out.println("获取的参数为： id："+id+" 库存数num："+num);
+        skuService.changeSkuNum(id, num);
+        return new Result(true,StatusCode.OK,"修改库存成功");
+    }
+
     /***
      * Sku分页条件搜索实现
      * @param sku

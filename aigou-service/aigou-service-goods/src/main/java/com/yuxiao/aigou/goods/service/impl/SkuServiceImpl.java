@@ -20,6 +20,17 @@ public class SkuServiceImpl implements SkuService {
 
 
     /**
+     * 根据sku id  修改库存
+     */
+    @Override
+    public void changeSkuNum(Long id, Integer num) {
+        Sku sku=new Sku();
+        sku.setId(id);
+        sku.setNum(num);
+        skuMapper.updateByPrimaryKeySelective(sku);
+    }
+
+    /**
      * Sku条件+分页查询
      * @param sku 查询条件
      * @param page 页码

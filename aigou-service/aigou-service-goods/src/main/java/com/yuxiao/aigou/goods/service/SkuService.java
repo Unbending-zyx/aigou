@@ -7,6 +7,11 @@ import java.util.List;
 
 public interface SkuService {
 
+    /**
+     * 根据sku id  修改库存
+     */
+    void changeSkuNum(Long id,Integer num);
+
     /***
      * Sku多条件分页查询
      * @param sku
